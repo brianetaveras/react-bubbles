@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import axios from 'axios';
 
 const LoginCard = styled.div`
 
@@ -12,15 +13,39 @@ const LoginCard = styled.div`
 
 `
 
+const Input = styled.input`
+  width: 90%;
+  height: 50px;
+  margin: 10px 0;
+  padding: 0 5px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+  
+  `
+  
+  const LoginButton = styled.button`
+    width: 90%;
+    height: 50px;
+    margin: 10px 0;
+    padding: 0 5px;
+
+
+
+`
+
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+  
   return (
     <>
     <LoginCard>
       <h1>Welcome to the Bubble App!</h1>
       <p>Build a login page here</p>
-
+    <Input type="text" name="username" placeholder="Username"/>
+    <Input type="text" name="password" placeholder="Password"/>
+    <LoginButton>Log In</LoginButton>
     </LoginCard>
     </>
   );
