@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ const LoginCard = styled.div`
 const Input = styled.input`
   width: 90%;
   height: 50px;
-  margin: 10px 0;
+  margin: 10px auto;
   padding: 0 5px;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
@@ -27,16 +27,26 @@ const Input = styled.input`
   const LoginButton = styled.button`
     width: 90%;
     height: 50px;
-    margin: 10px 0;
+    margin: 10px auto;
     padding: 0 5px;
 
 
 
 `
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    if(token){
+      props.history.push('/');
+    }
+
+  }, [])
+
+
   const [info, setInfo] = useState({});
 
   const handleChange = e =>{
@@ -50,8 +60,8 @@ const Login = () => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/login', info)
     .then(res=>{
-      console.log(res)
       localStorage.setItem('token', res.data.payload);
+      props.history.push('/');
     })
   }
 
@@ -62,7 +72,7 @@ const Login = () => {
       <p>Build a login page here</p>
     <form onSubmit={handleSubmit}>
     <Input onChange={handleChange} type="text" name="username" placeholder="Username"/>
-    <Input onChange={handleChange} type="text" name="password" placeholder="Password"/>
+    <Input onChange={handleChange} type="password" name="password" placeholder="Password"/>
     <LoginButton>Log In</LoginButton>
 
     </form>
