@@ -56,8 +56,8 @@ const Login = (props) => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/login', info)
     .then(res=>{
+      props.history.push('/')
       localStorage.setItem('token', res.data.payload);
-      props.history.push('/');
     })
   }
 
