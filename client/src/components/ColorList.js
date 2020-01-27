@@ -19,7 +19,7 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth().put(`api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res=>{
       updateColors(colors.map(color=>{
-        if (color.id == res.data.id){
+        if (color.id === res.data.id){
           return res.data
         }
         return color

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -35,17 +35,13 @@ const Input = styled.input`
 `
 
 const Login = (props) => {
+
+  const token = localStorage.getItem('token');
+  if(token){
+    props.history.push('/');
+  }
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    if(token){
-      props.history.push('/');
-    }
-
-  }, [])
-
 
   const [info, setInfo] = useState({});
 
